@@ -4,12 +4,12 @@ const realImages = [];
 
 
 for (let i = 1; i <= 1211; i++) {
-    let index = String(i).padStart(8, "0"); // 转换成 4 位数，如 0001, 0002
+    let index = String(i).padStart(8, "0"); 
     modelImages.push(`frames/${index}.jpg`);
 }
 
 for (let i = 0; i <= 1211; i++) {
-    let index = String(i).padStart(8, "0"); // 转换成 8 位数，如 00000001
+    let index = String(i).padStart(8, "0"); 
     realImages.push(`real_frames/${index}.jpg`);
 }
 
@@ -32,7 +32,7 @@ let isRealImageVisible = false;
 function preloadImages(imageArray) {
     imageArray.forEach(src => {
         const img = new Image();
-        img.src = src;  // 让浏览器后台加载
+        img.src = src;  
     });
 }
 
@@ -40,12 +40,11 @@ function preloadImages(imageArray) {
 preloadImages(modelImages);
 preloadImages(realImages);
 
-// 初始图片
+// init
 imgElement.style.Image = `url(${realImages[0]})`;
 
 
 function glitchEffect() {
-    // 确保音频被播放
     audioPlayer.play().catch((error) => console.log("音频播放失败:", error));
 
     let volume = 1;
@@ -67,13 +66,13 @@ function updateAudio() {
         // Add glitch effect for model images
         glitchEffect();
     } else {
-        audioPlayer.play().catch((error) => console.log("音频播放失败:", error)); // 播放正常音频
+        audioPlayer.play().catch((error) => console.log("fail:", error)); 
     }
 }
 
 window.addEventListener("click", () => {
-    audioPlayer.play().catch(error => console.log("音频播放失败:", error));
-}, { once: true }); // 确保只执行一次
+    audioPlayer.play().catch(error => console.log("fail:", error));
+}, { once: true }); 
 
 
 // scroll
@@ -93,7 +92,7 @@ window.addEventListener("wheel", (event) => {
         imgElement.src = modelImages[currentIndex]; // 只有加载完才替换，避免闪烁
     };
 
-    // **滚动停止后，插入真实图像**
+    // 滚动停止后，插入真实图像
     scrollTimeout = setTimeout(() => {
         if (!isRealImageVisible) {
             let realIndex = currentIndex % realImages.length;
